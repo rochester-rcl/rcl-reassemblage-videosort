@@ -38,11 +38,19 @@ color: #fff;</string>
       <widget class="QGroupBox" name="sortOptions">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>241</width>
+         <x>30</x>
+         <y>30</y>
+         <width>291</width>
          <height>61</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Helvetica</family>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: none;</string>
        </property>
        <property name="title">
         <string/>
@@ -50,16 +58,20 @@ color: #fff;</string>
        <widget class="QRadioButton" name="hue">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>10</x>
           <y>20</y>
-          <width>102</width>
-          <height>20</height>
+          <width>71</width>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Helvetica</family>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 1px solid #fff;
+padding: 5px;</string>
         </property>
         <property name="text">
          <string>Hue</string>
@@ -68,16 +80,20 @@ color: #fff;</string>
        <widget class="QRadioButton" name="saturation">
         <property name="geometry">
          <rect>
-          <x>60</x>
+          <x>80</x>
           <y>20</y>
           <width>102</width>
-          <height>20</height>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Helvetica</family>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 1px solid #fff;
+padding: 5px;</string>
         </property>
         <property name="text">
          <string>Saturation</string>
@@ -86,16 +102,21 @@ color: #fff;</string>
        <widget class="QRadioButton" name="contours">
         <property name="geometry">
          <rect>
-          <x>160</x>
+          <x>180</x>
           <y>20</y>
           <width>102</width>
-          <height>20</height>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Helvetica</family>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 1px solid #fff;
+padding: 5px;
+</string>
         </property>
         <property name="text">
          <string>Contours</string>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ImageSort/mainwindow.ui'
+# Form implementation generated from reading ui file 'mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.5.1
 #
@@ -32,26 +32,37 @@ class Ui_MainWindow(object):
         self.controls.setTitle("")
         self.controls.setObjectName("controls")
         self.sortOptions = QtWidgets.QGroupBox(self.controls)
-        self.sortOptions.setGeometry(QtCore.QRect(10, 40, 241, 61))
+        self.sortOptions.setGeometry(QtCore.QRect(30, 30, 291, 61))
+        font = QtGui.QFont()
+        font.setFamily("Helvetica")
+        self.sortOptions.setFont(font)
+        self.sortOptions.setStyleSheet("background-color: none;")
         self.sortOptions.setTitle("")
         self.sortOptions.setObjectName("sortOptions")
         self.hue = QtWidgets.QRadioButton(self.sortOptions)
-        self.hue.setGeometry(QtCore.QRect(0, 20, 102, 20))
+        self.hue.setGeometry(QtCore.QRect(10, 20, 71, 31))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.hue.setFont(font)
+        self.hue.setStyleSheet("border: 1px solid #fff;\n"
+"padding: 5px;")
         self.hue.setObjectName("hue")
         self.saturation = QtWidgets.QRadioButton(self.sortOptions)
-        self.saturation.setGeometry(QtCore.QRect(60, 20, 102, 20))
+        self.saturation.setGeometry(QtCore.QRect(80, 20, 102, 31))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.saturation.setFont(font)
+        self.saturation.setStyleSheet("border: 1px solid #fff;\n"
+"padding: 5px;")
         self.saturation.setObjectName("saturation")
         self.contours = QtWidgets.QRadioButton(self.sortOptions)
-        self.contours.setGeometry(QtCore.QRect(160, 20, 102, 20))
+        self.contours.setGeometry(QtCore.QRect(180, 20, 102, 31))
         font = QtGui.QFont()
         font.setFamily("Helvetica")
         self.contours.setFont(font)
+        self.contours.setStyleSheet("border: 1px solid #fff;\n"
+"padding: 5px;\n"
+"")
         self.contours.setObjectName("contours")
         self.sort = QtWidgets.QPushButton(self.controls)
         self.sort.setGeometry(QtCore.QRect(230, 10, 113, 32))
