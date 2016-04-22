@@ -25,7 +25,7 @@ class VideoSortApp(QMainWindow, Ui_MainWindow, QWidget):
         self.sort.clicked.connect(self.sortVideo)
         self.results.setViewMode(self.results.IconMode)
         self.results.setResizeMode(self.results.Adjust)
-        self.features = None
+        self.features = []
         self.sorted = None
 
         #player properties
@@ -40,6 +40,7 @@ class VideoSortApp(QMainWindow, Ui_MainWindow, QWidget):
         self.graphicsView.resize(640,480)
         self.graphicsView.show()
         self.results.itemDoubleClicked.connect(self.seekVideo)
+        self.videoLoaded = False
 
     def sizeHint(self):
         return QtCore.QSize(640,480)
@@ -80,10 +81,13 @@ class VideoSortApp(QMainWindow, Ui_MainWindow, QWidget):
                     self.getThread.resultsSignal.connect(self.setFeatures)
                     self.getThread.start()
                     self.player.setMedia(QMediaContent(QtCore.QUrl.fromLocalFile(filename)))
+                #Just set the last file as the current file
+                self.player.setMedia(QMediaContent(QtCore.QUrl.fromLocalFile(filename)))
+                self.currentMedia = filename
 
     def setFeatures(self, features):
-        #inherit QListWidgetItem and add some custom properties - i.e. the video and time in msec
-        self.features = features
+        for feature in features:
+            self.features.append(feature)
         self.hue.toggled.connect(self.displayResults)
         self.saturation.toggled.connect(self.displayResults)
         self.contours.toggled.connect(self.displayResults)
@@ -112,8 +116,47 @@ class VideoSortApp(QMainWindow, Ui_MainWindow, QWidget):
         print self.player.mediaStatus()
         if Qitem.feature['video'] != self.currentMedia:
             self.player.setMedia(QMediaContent(QtCore.QUrl.fromLocalFile(Qitem.feature['video'])))
-        self.player.setPosition(Qitem.feature['milliseconds'])
-        self.player.play()
+            self.videoLoadProgress(self.player)
+            self.currentMedia = Qitem.feature['video']
+
+        else:
+            self.videoLoaded = True
+
+        if self.videoLoaded:
+            self.player.setPosition(Qitem.feature['milliseconds'])
+            self.player.play()
+
+        else:
+
+            #set up progress bar here, or loading text
+
+    def videoLoadProgress(self, QMediaPlayerObject):
+        self.videoStatus = VideoLoadStatus(QMediaPlayerObject)
+        self.videoStatus.videoLoaded.connect(self.getVideoStatus)
+
+    def getVideoStatus(self, status):
+        self.status = status
+
+
+class VideoLoadStatus(QtCore.QThread, QtCore.QObject):
+    videoLoaded = QtCore.pyqtSignal(object)
+    def __init__(self, QMediaPlayerObject):
+        super(VideoLoadStatus, self).__init__()
+        self.mediaPlayer = QMediaPlayerObject
+        self.returnStatus = False
+
+    def run(self):
+        videoLoaded = self.checkVideoStatus()
+        self.videoLoaded.emit(videoLoaded)
+
+    def checkVideoStatus(self):
+        status = self.mediaPlayer.mediaStatus()
+
+        while True:
+            if status == 3:
+                self.returnStatus = True
+
+        return self.returnStatus
 
 
 class VideoListItem(QListWidgetItem):
